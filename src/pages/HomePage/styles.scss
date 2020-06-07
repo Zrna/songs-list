@@ -1,0 +1,30 @@
+@import '../../styles/colors';
+@import '../../styles/mediaQueries';
+
+header {
+  padding: 20px;
+
+  h1 {
+    text-align: center;
+  }
+
+  select, .add-new {
+    cursor: pointer;
+    border: 1px solid $gray-color;
+    border-radius: 15px;
+    outline: none;
+    padding: 5px 10px;
+    font-size: 14px;
+    margin-right: 10px;
+
+    &:hover {
+      border-color: $blue-color;
+    }
+  }
+}
+
+@include mobile {
+  header {
+    padding: 10px;
+  }
+}

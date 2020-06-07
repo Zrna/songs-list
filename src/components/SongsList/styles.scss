@@ -1,0 +1,56 @@
+@import '../../styles/colors';
+@import '../../styles/mediaQueries';
+
+.songs-list {
+  padding: 20px;
+
+  input.search {
+    border-radius: 15px;
+    outline: none;
+    padding: 5px 10px;
+    border-style: none;
+    border: 1px solid $gray-color;
+  }
+
+  .columns {
+    padding: 0 5px;
+  }
+
+  .id,
+  .artist,
+  .song-name,
+  .link {
+    display: inline-block;
+    padding-right: 5px;
+    vertical-align: middle;
+  }
+
+  .id {
+    width: 5%;
+  }
+
+  .artist {
+    width: 25%;
+  }
+
+  .song-name {
+    width: 30%;
+  }
+
+  .link {
+    width: 25%;
+    word-break: break-all;
+  }
+}
+
+@include mobile {
+  .songs-list {
+    padding: 10px;
+
+    .columns {
+      p {
+        font-size: 15px;
+      }
+    }
+  }
+}

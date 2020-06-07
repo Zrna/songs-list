@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import './styles.scss';
+
 import { loadData } from '../../common/crud';
 import { sortBy, sortById } from '../../common/sorting';
 
@@ -9,7 +11,7 @@ import SongsList from '../../components/SongsList';
 const HomePage = () => {
   const [ songsList, setSongsList ] = useState([]);
   const [ sortByValue, setSortByValue ] = useState('');
-  const [ showInputs, setShowInputs ] = useState(false);
+  const [ openAddNewModal, setOpenAddNewModal ] = useState(false);
 
   useEffect(() => {
     fetchAndSetData();
@@ -32,19 +34,22 @@ const HomePage = () => {
 
   return (
     <>
-      <header>Songs List</header>
+      <header>
+        <h1>Songs List</h1>
+        <select value={sortByValue} onChange={handleSort}>
+          <option value='' disabled>Sort by</option>
+          <option value='sortById'>Id</option>
+          <option value='sortByArtist'>Artist</option>
+          <option value='sortBySongName'>Song Name</option>
+        </select>
+        <span className='add-new' onClick={() => setOpenAddNewModal(true)}>Add New Song</span>
+      </header>
 
-      <span>Sort by: </span>
-      <select value={sortByValue} onChange={handleSort}>
-        <option value='sortById'>Id</option>
-        <option value='sortByArtist'>Artist</option>
-        <option value='sortBySongName'>Song Name</option>
-      </select>
 
-      <button onClick={() => setShowInputs(!showInputs)} disabled={showInputs}>Add New</button>
-      {showInputs ?
+      {openAddNewModal ?
         <AddSongForm
-          setShowInputs={setShowInputs}
+          openAddNewModal={openAddNewModal}
+          setOpenAddNewModal={setOpenAddNewModal}
           songsList={songsList}
           fetchAndSetData={fetchAndSetData}
         />

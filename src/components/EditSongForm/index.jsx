@@ -3,6 +3,9 @@ import React, { useState } from 'react';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 
+import '../../styles/_modal.scss';
+import errorIcon from '../../assets/error.svg';
+
 import { updateSong } from '../../common/crud';
 import { onlySpaces } from '../../common/regex';
 
@@ -23,7 +26,7 @@ const EditSong = ({ open, setOpen, info, songsList, fetchAndSetData }) => {
     e.preventDefault();
     
     if (onlySpaces.test(editArtist) || onlySpaces.test(editSongName)) {
-      setErrorMsg('Input fields can\'t be empty.');
+      setErrorMsg('Input fields can\'t be empty');
     } else {
       const updatedSong = {
         id,
@@ -40,9 +43,10 @@ const EditSong = ({ open, setOpen, info, songsList, fetchAndSetData }) => {
   };
 
   return (
-    <Modal open={open} onClose={() => setOpen(false)} center>
-      <p>Edit: <span style={{ fontWeight: 'bold' }}>{artist} - {songName}</span> </p>
-      {errorMsg && <p>{errorMsg}</p>}
+    <Modal classNames={{ modal: 'modal' }} open={open} onClose={() => setOpen(false)} center>
+      <h2 className='title'>Edit song</h2>
+      <h4>{artist} - {songName}</h4>
+      {errorMsg && <p className='error-message'><img src={errorIcon} alt='Error' /> {errorMsg}</p>}
 
       <form onSubmit={handleEditSong}>
         <label htmlFor='id'>ID:</label>
@@ -83,7 +87,7 @@ const EditSong = ({ open, setOpen, info, songsList, fetchAndSetData }) => {
           onChange={handleInputChange}
           required={true}
         />
-        <button type='submit'>Save changes</button>
+        <button className='confirm' type='submit'>Save changes</button>
       </form>
     </Modal>
   )

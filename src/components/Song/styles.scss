@@ -1,23 +1,37 @@
 @import '../../styles/colors';
+@import '../../styles/mediaQueries';
 
 .song {
-  .id,
-  .artist,
-  .song-name,
-  .link {
-    font-size: 18px;
-    margin: 20px;
+  border-top: 1px solid #ccc;
+  font-size: 16px;
+  padding: 0 5px;
+
+  &:last-child {
+    border-bottom: 1px solid #ccc;
   }
 
-  .delete {
-    cursor: pointer;
-    border: 1px solid $gray-color;
-    background: none;
-    border-radius: 10px;
-    outline: none;
+  &:nth-child(odd) {
+    background: lighten($gray-color, 15%);
+  }
 
-    &:hover {
-      color: $red-color;
+  .actions {
+    display: inline-block;
+    width: 5%;
+
+    img {
+      width: 16px;
+      height: auto;
+      margin: 0 5px;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
+  }
+}
+
+@include mobile {
+  .song {
+    font-size: 14px;
   }
 }

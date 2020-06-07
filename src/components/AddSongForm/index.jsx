@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
+
+import '../../styles/_modal.scss';
+import errorIcon from '../../assets/error.svg';
+
 import { addSong } from '../../common/crud';
 import { onlySpaces } from '../../common/regex';
 
-const AddSongForm = ({ setShowInputs, songsList, fetchAndSetData }) => {
+const AddSongForm = ({ openAddNewModal, setOpenAddNewModal, songsList, fetchAndSetData }) => {
   const [ newArtist, setNewArtist ] = useState('');
   const [ newSongName, setNewSongName ] = useState('');
   const [ newSongLink, setNewSongLink ] = useState('');
@@ -41,13 +47,16 @@ const AddSongForm = ({ setShowInputs, songsList, fetchAndSetData }) => {
     setNewSongName('');
     setNewSongLink('');
     setErrorMsg('');
-    setShowInputs(false);
+    setOpenAddNewModal(false);
   };
 
   return (
-    <>
-      {errorMsg && <p>{errorMsg}</p>}
+    <Modal classNames={{ modal: 'modal' }} open={openAddNewModal} onClose={() => setOpenAddNewModal(false)} center>
+      <h2 className='title'>Add New Song</h2>
+      {errorMsg && <p className='error-message'><img src={errorIcon} alt='Error' /> {errorMsg}</p>}
+
       <form onSubmit={handleAddSong}>
+      <label htmlFor='newArtist'>Artist:</label>
         <input
           type='text'
           name='newArtist'
@@ -57,6 +66,7 @@ const AddSongForm = ({ setShowInputs, songsList, fetchAndSetData }) => {
           required={true}
         />
 
+        <label htmlFor='newSongName'>Song Name:</label>
         <input
           type='text'
           name='newSongName'
@@ -66,6 +76,7 @@ const AddSongForm = ({ setShowInputs, songsList, fetchAndSetData }) => {
           required={true}
         />
 
+        <label htmlFor='newSongLink'>Link:</label>
         <input
           type='url'
           name='newSongLink'
@@ -75,10 +86,10 @@ const AddSongForm = ({ setShowInputs, songsList, fetchAndSetData }) => {
           required={true}
         />
 
-        <button type='submit'>Add</button>
+        <button className='confirm' type='submit'>Confirm</button>
       </form>
-      <button type='reset' onClick={() => setShowInputs(false)}>Cancel</button>
-    </>
+      <button className='cancel' type='reset' onClick={() => setOpenAddNewModal(false)}>Cancel</button>
+    </Modal>
   )
 }
 
