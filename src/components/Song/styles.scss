@@ -1,0 +1,23 @@
+@import '../../styles/colors';
+
+.song {
+  .id,
+  .artist,
+  .song-name,
+  .link {
+    font-size: 18px;
+    margin: 20px;
+  }
+
+  .delete {
+    cursor: pointer;
+    border: 1px solid $gray-color;
+    background: none;
+    border-radius: 10px;
+    outline: none;
+
+    &:hover {
+      color: $red-color;
+    }
+  }
+}
