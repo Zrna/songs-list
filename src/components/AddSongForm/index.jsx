@@ -27,7 +27,7 @@ const AddSongForm = ({ openAddNewModal, setOpenAddNewModal, songsList, fetchAndS
     if (onlySpaces.test(newArtist) || onlySpaces.test(newSongName)) {
       setErrorMsg('Input fields can\'t be empty.');
     } else {
-      const lastSongIdInList = songsList[songsList.length - 1].id;
+      const lastSongIdInList = Math.max.apply(Math, songsList.map(song => song.id));
 
       const newSong = {
         id: lastSongIdInList + 1,
