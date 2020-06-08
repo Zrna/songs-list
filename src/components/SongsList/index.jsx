@@ -12,7 +12,7 @@ const SongsList = ({ songsList, fetchAndSetData }) => {
     <div className='songs-list'>
       <input
         className='search'
-        placeholder='Search list...'
+        placeholder='Search the list by artist...'
         name='searchByArtist'
         onChange={e => setFilteredArtist(e.target.value.trim())}
       />
@@ -24,7 +24,9 @@ const SongsList = ({ songsList, fetchAndSetData }) => {
         <p className='link'>Link</p>
       </div>
 
-      {
+      {filteredData.length === 0 ?
+        <p>No data.</p>
+        :
         filteredData && filteredData.map(song => (
           <Song
             key={song.id}

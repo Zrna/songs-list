@@ -30,9 +30,9 @@ const EditSong = ({ open, setOpen, info, songsList, fetchAndSetData }) => {
     } else {
       const updatedSong = {
         id,
-        artist: editArtist,
-        songName: editSongName,
-        link: editLink
+        artist: editArtist.trim(),
+        songName: editSongName.trim(),
+        link: editLink.trim()
       };
 
       updateSong(updatedSong, songsList);

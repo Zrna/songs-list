@@ -28,12 +28,13 @@ const AddSongForm = ({ openAddNewModal, setOpenAddNewModal, songsList, fetchAndS
       setErrorMsg('Input fields can\'t be empty.');
     } else {
       const lastSongIdInList = Math.max.apply(Math, songsList.map(song => song.id));
+      const newId = lastSongIdInList === -Infinity ? 1 : lastSongIdInList + 1;
 
       const newSong = {
-        id: lastSongIdInList + 1,
-        artist: newArtist,
-        songName: newSongName,
-        link: newSongLink
+        id: newId,
+        artist: newArtist.trim(),
+        songName: newSongName.trim(),
+        link: newSongLink.trim()
       };
 
       addSong(newSong, songsList);
