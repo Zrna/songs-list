@@ -2,12 +2,10 @@ import initialData from '../initialData';
 
 export const setData = (data = initialData) => {
   localStorage.setItem('data', JSON.stringify(data));
-  console.log('set data', data);
 };
 
 export const loadData = () => {
   const localStorageExists = localStorage.hasOwnProperty('data');
-  console.log('load data');
   if (!localStorageExists) setData();
   return JSON.parse(localStorage.getItem('data'));
 };

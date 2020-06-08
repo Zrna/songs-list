@@ -45,7 +45,6 @@ const HomePage = () => {
         <span className='add-new' onClick={() => setOpenAddNewModal(true)}>Add New Song</span>
       </header>
 
-
       {openAddNewModal ?
         <AddSongForm
           openAddNewModal={openAddNewModal}
