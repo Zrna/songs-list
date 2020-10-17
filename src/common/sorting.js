@@ -1,22 +1,11 @@
-import { setData } from './crud';
-
-export const sortById = () => {
-  const data = JSON.parse(localStorage.getItem('data'));
-  const sorted = data.sort((a, b) => a.id - b.id);
-
-  setData(sorted);
+export const sortById = data => {
+  return data.sort((a, b) => a.id - b.id);
 };
 
-export const sortBy = selectedValue => {
-  const data = JSON.parse(localStorage.getItem('data'));
-
-  let value;
-  if (selectedValue === 'sortByArtist') value = 'artist';
-  if (selectedValue === 'sortBySongName') value = 'songName';
-
+export const sortBy = (data, property) => {
   const sorted = data.sort((a, b) => {
-    return a[value].toLowerCase().localeCompare(b[value].toLowerCase());
+    return a[property].toLowerCase().localeCompare(b[property].toLowerCase());
   });
 
-  setData(sorted);
+  return sorted;
 };
