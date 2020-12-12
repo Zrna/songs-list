@@ -6,14 +6,19 @@ import { Modal } from 'react-responsive-modal';
 import '../../styles/_modal.scss';
 import errorIcon from '../../assets/error.svg';
 
-import { addSong } from '../../common/crud';
-import { onlySpaces } from '../../common/regex';
+import { addSong } from '../../crud';
+import { onlySpaces } from '../../utils';
 
-const AddSongForm = ({ openAddNewModal, setOpenAddNewModal, songsList, fetchAndSetData }) => {
-  const [ newArtist, setNewArtist ] = useState('');
-  const [ newSongName, setNewSongName ] = useState('');
-  const [ newSongLink, setNewSongLink ] = useState('');
-  const [ errorMsg, setErrorMsg ] = useState('');
+const AddSongForm = ({
+  openAddNewModal,
+  setOpenAddNewModal,
+  songsList,
+  fetchAndSetData,
+}) => {
+  const [newArtist, setNewArtist] = useState('');
+  const [newSongName, setNewSongName] = useState('');
+  const [newSongLink, setNewSongLink] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
 
   const handleInputChange = e => {
     if (e.target.name === 'newArtist') setNewArtist(e.target.value);
@@ -25,16 +30,19 @@ const AddSongForm = ({ openAddNewModal, setOpenAddNewModal, songsList, fetchAndS
     e.preventDefault();
 
     if (onlySpaces.test(newArtist) || onlySpaces.test(newSongName)) {
-      setErrorMsg('Input fields can\'t be empty.');
+      setErrorMsg("Input fields can't be empty.");
     } else {
-      const lastSongIdInList = Math.max.apply(Math, songsList.map(song => song.id));
+      const lastSongIdInList = Math.max.apply(
+        Math,
+        songsList.map(song => song.id)
+      );
       const newId = lastSongIdInList === -Infinity ? 1 : lastSongIdInList + 1;
 
       const newSong = {
         id: newId,
         artist: newArtist.trim(),
         songName: newSongName.trim(),
-        link: newSongLink.trim()
+        link: newSongLink.trim(),
       };
 
       addSong(newSong, songsList);
@@ -52,12 +60,21 @@ const AddSongForm = ({ openAddNewModal, setOpenAddNewModal, songsList, fetchAndS
   };
 
   return (
-    <Modal classNames={{ modal: 'modal' }} open={openAddNewModal} onClose={() => setOpenAddNewModal(false)} center>
+    <Modal
+      classNames={{ modal: 'modal' }}
+      open={openAddNewModal}
+      onClose={() => setOpenAddNewModal(false)}
+      center
+    >
       <h2 className='title'>Add New Song</h2>
-      {errorMsg && <p className='error-message'><img src={errorIcon} alt='Error' /> {errorMsg}</p>}
+      {errorMsg && (
+        <p className='error-message'>
+          <img src={errorIcon} alt='Error' /> {errorMsg}
+        </p>
+      )}
 
       <form onSubmit={handleAddSong}>
-      <label htmlFor='newArtist'>Artist:</label>
+        <label htmlFor='newArtist'>Artist:</label>
         <input
           type='text'
           name='newArtist'
@@ -87,11 +104,19 @@ const AddSongForm = ({ openAddNewModal, setOpenAddNewModal, songsList, fetchAndS
           required={true}
         />
 
-        <button className='confirm' type='submit'>Confirm</button>
+        <button className='confirm' type='submit'>
+          Confirm
+        </button>
       </form>
-      <button className='cancel' type='reset' onClick={() => setOpenAddNewModal(false)}>Cancel</button>
+      <button
+        className='cancel'
+        type='reset'
+        onClick={() => setOpenAddNewModal(false)}
+      >
+        Cancel
+      </button>
     </Modal>
-  )
-}
+  );
+};
 
 export default AddSongForm;

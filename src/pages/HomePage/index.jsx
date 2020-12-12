@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import './styles.scss';
 
-import { setData, loadData } from '../../common/crud';
-import { sortBy, sortById } from '../../common/sorting';
+import { setData, loadData } from '../../crud';
+import { sortBy, sortById } from '../../utils';
 
 import AddSongForm from '../../components/AddSongForm';
 import SongsList from '../../components/SongsList';

@@ -6,15 +6,15 @@ import { Modal } from 'react-responsive-modal';
 import '../../styles/_modal.scss';
 import errorIcon from '../../assets/error.svg';
 
-import { updateSong } from '../../common/crud';
-import { onlySpaces } from '../../common/regex';
+import { updateSong } from '../../crud';
+import { onlySpaces } from '../../utils';
 
 const EditSong = ({ open, setOpen, info, songsList, fetchAndSetData }) => {
   const { id, artist, songName, link } = info;
-  const [ editArtist, setEditArtist ] = useState(artist);
-  const [ editSongName, setEditSongName ] = useState(songName);
-  const [ editLink, setEditLink ] = useState(link);
-  const [ errorMsg, setErrorMsg ] = useState('');
+  const [editArtist, setEditArtist] = useState(artist);
+  const [editSongName, setEditSongName] = useState(songName);
+  const [editLink, setEditLink] = useState(link);
+  const [errorMsg, setErrorMsg] = useState('');
 
   const handleInputChange = e => {
     if (e.target.name === 'editArtist') setEditArtist(e.target.value);
@@ -24,15 +24,15 @@ const EditSong = ({ open, setOpen, info, songsList, fetchAndSetData }) => {
 
   const handleEditSong = e => {
     e.preventDefault();
-    
+
     if (onlySpaces.test(editArtist) || onlySpaces.test(editSongName)) {
-      setErrorMsg('Input fields can\'t be empty');
+      setErrorMsg("Input fields can't be empty");
     } else {
       const updatedSong = {
         id,
         artist: editArtist.trim(),
         songName: editSongName.trim(),
-        link: editLink.trim()
+        link: editLink.trim(),
       };
 
       updateSong(updatedSong, songsList);
@@ -43,10 +43,21 @@ const EditSong = ({ open, setOpen, info, songsList, fetchAndSetData }) => {
   };
 
   return (
-    <Modal classNames={{ modal: 'modal' }} open={open} onClose={() => setOpen(false)} center>
+    <Modal
+      classNames={{ modal: 'modal' }}
+      open={open}
+      onClose={() => setOpen(false)}
+      center
+    >
       <h2 className='title'>Edit song</h2>
-      <h4>{artist} - {songName}</h4>
-      {errorMsg && <p className='error-message'><img src={errorIcon} alt='Error' /> {errorMsg}</p>}
+      <h4>
+        {artist} - {songName}
+      </h4>
+      {errorMsg && (
+        <p className='error-message'>
+          <img src={errorIcon} alt='Error' /> {errorMsg}
+        </p>
+      )}
 
       <form onSubmit={handleEditSong}>
         <label htmlFor='id'>ID:</label>
@@ -87,10 +98,12 @@ const EditSong = ({ open, setOpen, info, songsList, fetchAndSetData }) => {
           onChange={handleInputChange}
           required={true}
         />
-        <button className='confirm' type='submit'>Save changes</button>
+        <button className='confirm' type='submit'>
+          Save changes
+        </button>
       </form>
     </Modal>
-  )
-}
+  );
+};
 
 export default EditSong;
