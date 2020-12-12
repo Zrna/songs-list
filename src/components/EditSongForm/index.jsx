@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 
-import errorIcon from '../../assets/error.svg';
+import { errorIcon } from '../../assets';
 import { updateSong } from '../../crud';
 import '../../styles/_modal.scss';
 import { onlySpaces } from '../../utils';
@@ -13,12 +13,6 @@ const EditSong = ({ open, setOpen, info, songsList, fetchAndSetData }) => {
   const [editSongName, setEditSongName] = useState(songName);
   const [editLink, setEditLink] = useState(link);
   const [errorMsg, setErrorMsg] = useState('');
-
-  const handleInputChange = e => {
-    if (e.target.name === 'editArtist') setEditArtist(e.target.value);
-    if (e.target.name === 'editSongName') setEditSongName(e.target.value);
-    if (e.target.name === 'editLink') setEditLink(e.target.value);
-  };
 
   const handleEditSong = e => {
     e.preventDefault();
@@ -51,6 +45,7 @@ const EditSong = ({ open, setOpen, info, songsList, fetchAndSetData }) => {
       <h4>
         {artist} - {songName}
       </h4>
+
       {errorMsg && (
         <p className='error-message'>
           <img src={errorIcon} alt='Error' /> {errorMsg}
@@ -59,13 +54,7 @@ const EditSong = ({ open, setOpen, info, songsList, fetchAndSetData }) => {
 
       <form onSubmit={handleEditSong}>
         <label htmlFor='id'>ID:</label>
-        <input
-          type='number'
-          name='id'
-          placeholder='ID'
-          value={id}
-          disabled={true}
-        />
+        <input type='number' name='id' placeholder='ID' value={id} disabled />
 
         <label htmlFor='editArtist'>Artist:</label>
         <input
@@ -73,8 +62,8 @@ const EditSong = ({ open, setOpen, info, songsList, fetchAndSetData }) => {
           name='editArtist'
           placeholder='Artist Name'
           value={editArtist}
-          onChange={handleInputChange}
-          required={true}
+          onChange={e => setEditArtist(e.target.value)}
+          required
         />
 
         <label htmlFor='editSongName'>Song Name:</label>
@@ -83,8 +72,8 @@ const EditSong = ({ open, setOpen, info, songsList, fetchAndSetData }) => {
           name='editSongName'
           placeholder='Song Name'
           value={editSongName}
-          onChange={handleInputChange}
-          required={true}
+          onChange={e => setEditSongName(e.target.value)}
+          required
         />
 
         <label htmlFor='editLink'>Link:</label>
@@ -93,8 +82,8 @@ const EditSong = ({ open, setOpen, info, songsList, fetchAndSetData }) => {
           name='editLink'
           placeholder='Song Link'
           value={editLink}
-          onChange={handleInputChange}
-          required={true}
+          onChange={e => setEditLink(e.target.value)}
+          required
         />
         <button className='confirm' type='submit'>
           Save changes

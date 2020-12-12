@@ -6,8 +6,8 @@ import './styles.scss';
 
 const SongsList = ({ songsList, fetchAndSetData }) => {
   const [filteredArtist, setFilteredArtist] = useState('');
-  const filteredData = songsList.filter(song =>
-    song.artist.toLowerCase().includes(filteredArtist.toLowerCase())
+  const filteredData = songsList.filter(({ artist }) =>
+    artist.toLowerCase().includes(filteredArtist.toLowerCase())
   );
 
   return (
@@ -26,7 +26,7 @@ const SongsList = ({ songsList, fetchAndSetData }) => {
         <p className='link'>Link</p>
       </div>
 
-      {filteredData.length === 0 ? (
+      {!filteredData.length ? (
         <p>No data.</p>
       ) : (
         filteredData &&

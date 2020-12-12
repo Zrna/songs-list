@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 
-import errorIcon from '../../assets/error.svg';
+import { errorIcon } from '../../assets';
 import { addSong } from '../../crud';
 import '../../styles/_modal.scss';
 import { onlySpaces } from '../../utils';
@@ -17,12 +17,6 @@ const AddSongForm = ({
   const [newSongName, setNewSongName] = useState('');
   const [newSongLink, setNewSongLink] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
-
-  const handleInputChange = e => {
-    if (e.target.name === 'newArtist') setNewArtist(e.target.value);
-    if (e.target.name === 'newSongName') setNewSongName(e.target.value);
-    if (e.target.name === 'newSongLink') setNewSongLink(e.target.value);
-  };
 
   const handleAddSong = e => {
     e.preventDefault();
@@ -78,8 +72,8 @@ const AddSongForm = ({
           name='newArtist'
           placeholder='Artist Name'
           value={newArtist}
-          onChange={handleInputChange}
-          required={true}
+          onChange={e => setNewArtist(e.target.value)}
+          required
         />
 
         <label htmlFor='newSongName'>Song Name:</label>
@@ -88,8 +82,8 @@ const AddSongForm = ({
           name='newSongName'
           placeholder='Song Name'
           value={newSongName}
-          onChange={handleInputChange}
-          required={true}
+          onChange={e => setNewSongName(e.target.value)}
+          required
         />
 
         <label htmlFor='newSongLink'>Link:</label>
@@ -98,17 +92,17 @@ const AddSongForm = ({
           name='newSongLink'
           placeholder='Song Link'
           value={newSongLink}
-          onChange={handleInputChange}
-          required={true}
+          onChange={e => setNewSongLink(e.target.value)}
+          required
         />
 
-        <button className='confirm' type='submit'>
+        <button type='submit' className='confirm'>
           Confirm
         </button>
       </form>
       <button
-        className='cancel'
         type='reset'
+        className='cancel'
         onClick={() => setOpenAddNewModal(false)}
       >
         Cancel

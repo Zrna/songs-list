@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
-import penIcon from '../../assets/pen.svg';
-import trashIcon from '../../assets/trash.svg';
+import { penIcon, trashIcon } from '../../assets';
 import { deleteSong } from '../../crud';
 import EditSongForm from '../EditSongForm';
 
@@ -12,14 +11,15 @@ const Song = ({ info, songsList, fetchAndSetData }) => {
   const [openModal, setOpenModal] = useState(false);
 
   const handleSongDelete = id => {
-    if (
-      window.confirm(
-        `Are you sure you want to delete "${artist} - ${songName}"?`
-      )
-    ) {
+    const confirmDelete = window.confirm(
+      `Are you sure you want to delete "${artist} - ${songName}"?`
+    );
+
+    if (confirmDelete) {
       deleteSong(id, songsList);
       fetchAndSetData();
     }
+
     return;
   };
 
@@ -40,7 +40,7 @@ const Song = ({ info, songsList, fetchAndSetData }) => {
         />
       </div>
 
-      {openModal ? (
+      {openModal && (
         <EditSongForm
           open={openModal}
           setOpen={setOpenModal}
@@ -48,7 +48,7 @@ const Song = ({ info, songsList, fetchAndSetData }) => {
           songsList={songsList}
           fetchAndSetData={fetchAndSetData}
         />
-      ) : null}
+      )}
     </div>
   );
 };

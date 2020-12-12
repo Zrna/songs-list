@@ -12,9 +12,7 @@ const HomePage = () => {
   const [sortByValue, setSortByValue] = useState('');
   const [openAddNewModal, setOpenAddNewModal] = useState(false);
 
-  useEffect(() => {
-    fetchAndSetData();
-  }, []);
+  useEffect(() => fetchAndSetData(), []);
 
   const fetchAndSetData = () => {
     const response = loadData();
@@ -23,18 +21,18 @@ const HomePage = () => {
 
   const handleSort = e => {
     e.preventDefault();
-    const sort = e.target.value;
+    const sortType = e.target.value;
 
     let sortedSongsList;
-    if (sort === 'sortById') {
+    if (sortType === 'sortById') {
       sortedSongsList = sortById(songsList);
     } else {
-      const property = sort === 'sortBySongName' ? 'songName' : 'artist';
+      const property = sortType === 'sortBySongName' ? 'songName' : 'artist';
       sortedSongsList = sortBy(songsList, property);
     }
 
     setData(sortedSongsList);
-    setSortByValue(sort);
+    setSortByValue(sortType);
     fetchAndSetData();
   };
 
@@ -55,14 +53,14 @@ const HomePage = () => {
         </span>
       </header>
 
-      {openAddNewModal ? (
+      {openAddNewModal && (
         <AddSongForm
           openAddNewModal={openAddNewModal}
           setOpenAddNewModal={setOpenAddNewModal}
           songsList={songsList}
           fetchAndSetData={fetchAndSetData}
         />
-      ) : null}
+      )}
 
       <SongsList songsList={songsList} fetchAndSetData={fetchAndSetData} />
     </>
