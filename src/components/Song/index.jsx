@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import './styles.scss';
-
-import { deleteSong } from '../../crud';
-import EditSongForm from '../EditSongForm';
 
 import penIcon from '../../assets/pen.svg';
 import trashIcon from '../../assets/trash.svg';
+import { deleteSong } from '../../crud';
+import EditSongForm from '../EditSongForm';
+
+import './styles.scss';
 
 const Song = ({ info, songsList, fetchAndSetData }) => {
   const { id, artist, songName, link } = info;

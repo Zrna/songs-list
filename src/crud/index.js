@@ -17,10 +17,7 @@ export const deleteSong = (id, songsList) => {
 };
 
 export const addSong = (newSong, songsList) => {
-  const updatedList = [
-    ...songsList,
-    newSong
-  ];
+  const updatedList = [...songsList, newSong];
 
   setData(updatedList);
 };

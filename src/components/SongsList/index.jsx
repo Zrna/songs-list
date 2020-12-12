@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 
-import './styles.scss';
-
 import Song from '../Song';
 
+import './styles.scss';
+
 const SongsList = ({ songsList, fetchAndSetData }) => {
-  const [ filteredArtist, setFilteredArtist ] = useState('');
-  const filteredData = songsList.filter(song => song.artist.toLowerCase().includes(filteredArtist.toLowerCase()));
+  const [filteredArtist, setFilteredArtist] = useState('');
+  const filteredData = songsList.filter(song =>
+    song.artist.toLowerCase().includes(filteredArtist.toLowerCase())
+  );
 
   return (
     <div className='songs-list'>
@@ -16,7 +18,7 @@ const SongsList = ({ songsList, fetchAndSetData }) => {
         name='searchByArtist'
         onChange={e => setFilteredArtist(e.target.value.trim())}
       />
-      
+
       <div className='columns'>
         <p className='id'>#</p>
         <p className='artist'>Artist</p>
@@ -24,10 +26,11 @@ const SongsList = ({ songsList, fetchAndSetData }) => {
         <p className='link'>Link</p>
       </div>
 
-      {filteredData.length === 0 ?
+      {filteredData.length === 0 ? (
         <p>No data.</p>
-        :
-        filteredData && filteredData.map(song => (
+      ) : (
+        filteredData &&
+        filteredData.map(song => (
           <Song
             key={song.id}
             info={song}
@@ -35,9 +38,9 @@ const SongsList = ({ songsList, fetchAndSetData }) => {
             fetchAndSetData={fetchAndSetData}
           />
         ))
-      }
+      )}
     </div>
-  )
-}
+  );
+};
 
 export default SongsList;

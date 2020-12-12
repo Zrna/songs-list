@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
-import './styles.scss';
-
+import AddSongForm from '../../components/AddSongForm';
+import SongsList from '../../components/SongsList';
 import { setData, loadData } from '../../crud';
 import { sortBy, sortById } from '../../utils';
 
-import AddSongForm from '../../components/AddSongForm';
-import SongsList from '../../components/SongsList';
+import './styles.scss';
 
 const HomePage = () => {
   const [songsList, setSongsList] = useState([]);

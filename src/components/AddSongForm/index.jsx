@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 
-import '../../styles/_modal.scss';
 import errorIcon from '../../assets/error.svg';
-
 import { addSong } from '../../crud';
+import '../../styles/_modal.scss';
 import { onlySpaces } from '../../utils';
 
 const AddSongForm = ({
