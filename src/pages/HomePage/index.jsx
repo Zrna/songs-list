@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import AddSongForm from '../../components/AddSongForm';
 import SongsList from '../../components/SongsList';

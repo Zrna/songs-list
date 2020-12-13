@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { penIcon, trashIcon } from '../../assets';
 import { deleteSong } from '../../crud';
