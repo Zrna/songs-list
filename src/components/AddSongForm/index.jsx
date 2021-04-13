@@ -9,11 +9,7 @@ import { onlySpaces } from '../../utils';
 
 import Input from '../Input';
 
-const AddSongForm = ({
-  openAddNewModal,
-  setOpenAddNewModal,
-  fetchAndSetData,
-}) => {
+const AddSongForm = ({ isModalOpen, setIsModalOpen, fetchAndSetData }) => {
   const [newArtist, setNewArtist] = useState('');
   const [newSongName, setNewSongName] = useState('');
   const [newSongLink, setNewSongLink] = useState('');
@@ -50,14 +46,14 @@ const AddSongForm = ({
     setNewSongName('');
     setNewSongLink('');
     setErrorMsg('');
-    setOpenAddNewModal(false);
+    setIsModalOpen(false);
   };
 
   return (
     <Modal
       classNames={{ modal: 'modal' }}
-      open={openAddNewModal}
-      onClose={() => setOpenAddNewModal(false)}
+      open={isModalOpen}
+      onClose={() => setIsModalOpen(false)}
       center
     >
       <h2 className='title'>Add New Song</h2>
@@ -96,7 +92,7 @@ const AddSongForm = ({
       <button
         type='reset'
         className='cancel'
-        onClick={() => setOpenAddNewModal(false)}
+        onClick={() => setIsModalOpen(false)}
       >
         Cancel
       </button>

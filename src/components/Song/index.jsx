@@ -8,7 +8,8 @@ import './styles.scss';
 
 const Song = ({ song, fetchAndSetData }) => {
   const { id, artist, songName, link } = song;
-  const [openModal, setOpenModal] = useState(false);
+
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const handleSongDelete = id => {
     const confirmDelete = window.confirm(
@@ -32,7 +33,11 @@ const Song = ({ song, fetchAndSetData }) => {
         {link}
       </a>
       <div className='actions'>
-        <img src={penIcon} alt='Edit' onClick={() => setOpenModal(true)} />
+        <img
+          src={penIcon}
+          alt='Edit'
+          onClick={() => setIsEditModalOpen(true)}
+        />
         <img
           src={trashIcon}
           alt='Delete'
@@ -40,10 +45,10 @@ const Song = ({ song, fetchAndSetData }) => {
         />
       </div>
 
-      {openModal && (
+      {isEditModalOpen && (
         <EditSongForm
-          open={openModal}
-          setOpen={setOpenModal}
+          isModalOpen={isEditModalOpen}
+          setIsModalOpen={setIsEditModalOpen}
           song={song}
           fetchAndSetData={fetchAndSetData}
         />

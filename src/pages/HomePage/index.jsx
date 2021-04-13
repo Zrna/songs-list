@@ -11,7 +11,7 @@ import './styles.scss';
 const HomePage = () => {
   const [songsList, setSongsList] = useState([]);
   const [sortByValue, setSortByValue] = useState('');
-  const [openAddNewModal, setOpenAddNewModal] = useState(false);
+  const [isAddNewModalOpen, setIsAddNewModalOpen] = useState(false);
   const [filteredArtist, setFilteredArtist] = useState('');
 
   useEffect(() => fetchAndSetData(), []);
@@ -54,7 +54,7 @@ const HomePage = () => {
           <option value='sortByArtist'>Artist</option>
           <option value='sortBySongName'>Song Name</option>
         </select>
-        <span className='add-new' onClick={() => setOpenAddNewModal(true)}>
+        <span className='add-new' onClick={() => setIsAddNewModalOpen(true)}>
           Add New Song
         </span>
       </header>
@@ -64,10 +64,10 @@ const HomePage = () => {
         onChange={e => setFilteredArtist(e.target.value.trimStart())}
       />
       <SongsList songsList={filtereSongs} fetchAndSetData={fetchAndSetData} />
-      {openAddNewModal && (
+      {isAddNewModalOpen && (
         <AddSongForm
-          openAddNewModal={openAddNewModal}
-          setOpenAddNewModal={setOpenAddNewModal}
+          isModalOpen={isAddNewModalOpen}
+          setIsModalOpen={setIsAddNewModalOpen}
           songsList={songsList}
           fetchAndSetData={fetchAndSetData}
         />

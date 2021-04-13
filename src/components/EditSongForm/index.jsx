@@ -9,7 +9,7 @@ import { onlySpaces } from '../../utils';
 
 import Input from '../Input';
 
-const EditSong = ({ open, setOpen, song, fetchAndSetData }) => {
+const EditSong = ({ isModalOpen, setIsModalOpen, song, fetchAndSetData }) => {
   const { id, artist, songName, link } = song;
 
   const [editArtist, setEditArtist] = useState(artist);
@@ -32,7 +32,7 @@ const EditSong = ({ open, setOpen, song, fetchAndSetData }) => {
 
       updateSong(updatedSong);
       fetchAndSetData();
-      setOpen(false);
+      setIsModalOpen(false);
       setErrorMsg('');
     }
   };
@@ -40,21 +40,19 @@ const EditSong = ({ open, setOpen, song, fetchAndSetData }) => {
   return (
     <Modal
       classNames={{ modal: 'modal' }}
-      open={open}
-      onClose={() => setOpen(false)}
+      open={isModalOpen}
+      onClose={() => setIsModalOpen(false)}
       center
     >
       <h2 className='title'>Edit song</h2>
       <h4>
         {artist} - {songName}
       </h4>
-
       {errorMsg && (
         <p className='error-message'>
           <img src={errorIcon} alt='Error' /> {errorMsg}
         </p>
       )}
-
       <form onSubmit={handleEditSong}>
         <Input isDisabled label='ID' value={id} />
         <Input
@@ -83,7 +81,11 @@ const EditSong = ({ open, setOpen, song, fetchAndSetData }) => {
           Save changes
         </button>
       </form>
-      <button type='reset' className='cancel' onClick={() => setOpen(false)}>
+      <button
+        type='reset'
+        className='cancel'
+        onClick={() => setIsModalOpen(false)}
+      >
         Cancel
       </button>
     </Modal>
