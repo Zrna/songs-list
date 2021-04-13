@@ -7,6 +7,8 @@ import { addSong, getSongs } from '../../crud';
 import '../../styles/_modal.scss';
 import { onlySpaces } from '../../utils';
 
+import Input from '../Input';
+
 const AddSongForm = ({
   openAddNewModal,
   setOpenAddNewModal,
@@ -64,38 +66,29 @@ const AddSongForm = ({
           <img src={errorIcon} alt='Error' /> {errorMsg}
         </p>
       )}
-
       <form onSubmit={handleAddSong}>
-        <label htmlFor='newArtist'>Artist:</label>
-        <input
-          type='text'
-          name='newArtist'
+        <Input
+          isRequired
+          label='Artist'
           placeholder='Artist Name'
           value={newArtist}
           onChange={e => setNewArtist(e.target.value)}
-          required
         />
-
-        <label htmlFor='newSongName'>Song Name:</label>
-        <input
-          type='text'
-          name='newSongName'
+        <Input
+          isRequired
+          label='Song Name'
           placeholder='Song Name'
           value={newSongName}
           onChange={e => setNewSongName(e.target.value)}
-          required
         />
-
-        <label htmlFor='newSongLink'>Link:</label>
-        <input
-          type='url'
-          name='newSongLink'
+        <Input
+          isRequired
+          label='Link'
           placeholder='Song Link'
+          type='url'
           value={newSongLink}
           onChange={e => setNewSongLink(e.target.value)}
-          required
         />
-
         <button type='submit' className='confirm'>
           Confirm
         </button>

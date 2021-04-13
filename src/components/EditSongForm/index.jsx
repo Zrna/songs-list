@@ -7,8 +7,11 @@ import { updateSong } from '../../crud';
 import '../../styles/_modal.scss';
 import { onlySpaces } from '../../utils';
 
+import Input from '../Input';
+
 const EditSong = ({ open, setOpen, song, fetchAndSetData }) => {
   const { id, artist, songName, link } = song;
+
   const [editArtist, setEditArtist] = useState(artist);
   const [editSongName, setEditSongName] = useState(songName);
   const [editLink, setEditLink] = useState(link);
@@ -53,42 +56,36 @@ const EditSong = ({ open, setOpen, song, fetchAndSetData }) => {
       )}
 
       <form onSubmit={handleEditSong}>
-        <label htmlFor='id'>ID:</label>
-        <input type='number' name='id' placeholder='ID' value={id} disabled />
-
-        <label htmlFor='editArtist'>Artist:</label>
-        <input
-          type='text'
-          name='editArtist'
+        <Input isDisabled label='ID' value={id} />
+        <Input
+          isRequired
+          label='Artist'
           placeholder='Artist Name'
           value={editArtist}
           onChange={e => setEditArtist(e.target.value)}
-          required
         />
-
-        <label htmlFor='editSongName'>Song Name:</label>
-        <input
-          type='text'
-          name='editSongName'
+        <Input
+          isRequired
+          label='Song Name'
           placeholder='Song Name'
           value={editSongName}
           onChange={e => setEditSongName(e.target.value)}
-          required
         />
-
-        <label htmlFor='editLink'>Link:</label>
-        <input
-          type='url'
-          name='editLink'
+        <Input
+          isRequired
+          label='Link'
           placeholder='Song Link'
+          type='url'
           value={editLink}
           onChange={e => setEditLink(e.target.value)}
-          required
         />
         <button className='confirm' type='submit'>
           Save changes
         </button>
       </form>
+      <button type='reset' className='cancel' onClick={() => setOpen(false)}>
+        Cancel
+      </button>
     </Modal>
   );
 };
