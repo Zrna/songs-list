@@ -1,0 +1,10 @@
+@import '../../styles/colors';
+
+input.search {
+  border-radius: 15px;
+  outline: none;
+  padding: 5px 10px;
+  border-style: none;
+  border: 1px solid $gray-color;
+  margin: 20px;
+}

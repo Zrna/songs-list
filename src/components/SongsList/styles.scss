@@ -1,16 +1,7 @@
-@import '../../styles/colors';
 @import '../../styles/mediaQueries';
 
 .songs-list {
   padding: 20px;
-
-  input.search {
-    border-radius: 15px;
-    outline: none;
-    padding: 5px 10px;
-    border-style: none;
-    border: 1px solid $gray-color;
-  }
 
   .columns {
     padding: 0 5px;
