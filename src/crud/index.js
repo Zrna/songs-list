@@ -4,27 +4,33 @@ export const setData = (data = initialData) => {
   localStorage.setItem('data', JSON.stringify(data));
 };
 
-export const loadData = () => {
+export const getSongs = () => {
   const localStorageExists = localStorage.hasOwnProperty('data');
+
   if (!localStorageExists) setData();
+
   return JSON.parse(localStorage.getItem('data'));
 };
 
-export const deleteSong = (id, songsList) => {
-  const updatedList = songsList.filter(song => song.id !== id);
+export const deleteSong = id => {
+  const songs = getSongs();
+  const updatedList = songs.filter(song => song.id !== id);
 
   setData(updatedList);
 };
 
-export const addSong = (newSong, songsList) => {
-  const updatedList = [...songsList, newSong];
+export const addSong = newSong => {
+  const songs = getSongs();
+  const updatedList = [...songs, newSong];
 
   setData(updatedList);
 };
 
-export const updateSong = (updatedSong, songsList) => {
-  const updatedList = [...songsList];
-  const songIndex = songsList.findIndex(song => song.id === updatedSong.id);
+export const updateSong = updatedSong => {
+  const songs = getSongs();
+
+  const updatedList = [...songs];
+  const songIndex = songs.findIndex(song => song.id === updatedSong.id);
   updatedList[songIndex] = updatedSong;
 
   setData(updatedList);
