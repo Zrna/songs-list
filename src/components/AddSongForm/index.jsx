@@ -3,14 +3,13 @@ import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 
 import { errorIcon } from '../../assets';
-import { addSong } from '../../crud';
+import { addSong, getSongs } from '../../crud';
 import '../../styles/_modal.scss';
 import { onlySpaces } from '../../utils';
 
 const AddSongForm = ({
   openAddNewModal,
   setOpenAddNewModal,
-  songsList,
   fetchAndSetData,
 }) => {
   const [newArtist, setNewArtist] = useState('');
@@ -20,13 +19,14 @@ const AddSongForm = ({
 
   const handleAddSong = e => {
     e.preventDefault();
+    const songs = getSongs();
 
     if (onlySpaces.test(newArtist) || onlySpaces.test(newSongName)) {
       setErrorMsg("Input fields can't be empty.");
     } else {
       const lastSongIdInList = Math.max.apply(
         Math,
-        songsList.map(song => song.id)
+        songs.map(song => song.id)
       );
       const newId = lastSongIdInList === -Infinity ? 1 : lastSongIdInList + 1;
 
@@ -37,7 +37,7 @@ const AddSongForm = ({
         link: newSongLink.trim(),
       };
 
-      addSong(newSong, songsList);
+      addSong(newSong);
       fetchAndSetData();
       resetForm();
     }

@@ -7,8 +7,8 @@ import { updateSong } from '../../crud';
 import '../../styles/_modal.scss';
 import { onlySpaces } from '../../utils';
 
-const EditSong = ({ open, setOpen, info, songsList, fetchAndSetData }) => {
-  const { id, artist, songName, link } = info;
+const EditSong = ({ open, setOpen, song, fetchAndSetData }) => {
+  const { id, artist, songName, link } = song;
   const [editArtist, setEditArtist] = useState(artist);
   const [editSongName, setEditSongName] = useState(songName);
   const [editLink, setEditLink] = useState(link);
@@ -27,7 +27,7 @@ const EditSong = ({ open, setOpen, info, songsList, fetchAndSetData }) => {
         link: editLink.trim(),
       };
 
-      updateSong(updatedSong, songsList);
+      updateSong(updatedSong);
       fetchAndSetData();
       setOpen(false);
       setErrorMsg('');

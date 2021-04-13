@@ -6,8 +6,8 @@ import EditSongForm from '../EditSongForm';
 
 import './styles.scss';
 
-const Song = ({ info, songsList, fetchAndSetData }) => {
-  const { id, artist, songName, link } = info;
+const Song = ({ song, fetchAndSetData }) => {
+  const { id, artist, songName, link } = song;
   const [openModal, setOpenModal] = useState(false);
 
   const handleSongDelete = id => {
@@ -16,7 +16,7 @@ const Song = ({ info, songsList, fetchAndSetData }) => {
     );
 
     if (confirmDelete) {
-      deleteSong(id, songsList);
+      deleteSong(id);
       fetchAndSetData();
     }
 
@@ -44,8 +44,7 @@ const Song = ({ info, songsList, fetchAndSetData }) => {
         <EditSongForm
           open={openModal}
           setOpen={setOpenModal}
-          info={info}
-          songsList={songsList}
+          song={song}
           fetchAndSetData={fetchAndSetData}
         />
       )}

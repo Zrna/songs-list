@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 
 import AddSongForm from '../../components/AddSongForm';
+import Search from '../../components/Search';
 import SongsList from '../../components/SongsList';
-import { setData, loadData } from '../../crud';
+import { setData, getSongs } from '../../crud';
 import { sortBy, sortById } from '../../utils';
 
 import './styles.scss';
@@ -11,12 +12,13 @@ const HomePage = () => {
   const [songsList, setSongsList] = useState([]);
   const [sortByValue, setSortByValue] = useState('');
   const [openAddNewModal, setOpenAddNewModal] = useState(false);
+  const [filteredArtist, setFilteredArtist] = useState('');
 
   useEffect(() => fetchAndSetData(), []);
 
   const fetchAndSetData = () => {
-    const response = loadData();
-    setSongsList(response);
+    const songs = getSongs();
+    setSongsList(songs);
   };
 
   const handleSort = e => {
@@ -36,6 +38,10 @@ const HomePage = () => {
     fetchAndSetData();
   };
 
+  const filtereSongs = songsList.filter(({ artist }) =>
+    artist.toLowerCase().includes(filteredArtist.toLowerCase())
+  );
+
   return (
     <>
       <header>
@@ -52,7 +58,12 @@ const HomePage = () => {
           Add New Song
         </span>
       </header>
-
+      <Search
+        placeholder='Search the list by artist...'
+        value={filteredArtist}
+        onChange={e => setFilteredArtist(e.target.value.trimStart())}
+      />
+      <SongsList songsList={filtereSongs} fetchAndSetData={fetchAndSetData} />
       {openAddNewModal && (
         <AddSongForm
           openAddNewModal={openAddNewModal}
@@ -61,8 +72,6 @@ const HomePage = () => {
           fetchAndSetData={fetchAndSetData}
         />
       )}
-
-      <SongsList songsList={songsList} fetchAndSetData={fetchAndSetData} />
     </>
   );
 };
