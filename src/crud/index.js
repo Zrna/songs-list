@@ -1,4 +1,4 @@
-import initialData from '../initialData';
+import initialData from './initialData';
 
 export const setData = (data = initialData) => {
   localStorage.setItem('data', JSON.stringify(data));
